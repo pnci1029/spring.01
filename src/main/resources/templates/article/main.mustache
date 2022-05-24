@@ -1,0 +1,25 @@
+{{>resources/header}}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#List}}
+        <tr>
+            <th>{{id}}</th>
+            <td>{{username}}</td>
+            <td>{{content}}</td>
+        </tr>
+    {{/List}}
+    </tbody>
+</table>
+
+<a href="/content/new"><button type="button" class="btn btn-primary">새 글쓰기</button></a>
+
+
+{{>resources/footer}}

@@ -1,0 +1,24 @@
+{{>resources/header}}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#id}}
+        <tr>
+            <th>{{id}}</th>
+            <td>{{username}}</td>
+            <td>{{content}}</td>
+        </tr>
+    {{/id}}
+    </tbody>
+</table>
+
+<a href="/content"><button type="button" class="btn btn-primary">목록으로</button></a>
+
+{{>resources/footer}}
