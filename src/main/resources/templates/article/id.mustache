@@ -9,16 +9,16 @@
     </tr>
     </thead>
     <tbody>
-    {{#id}}
         <tr>
-            <th>{{id}}</th>
-            <td>{{username}}</td>
-            <td>{{content}}</td>
+            <th>{{find.id}}</th>
+            <td>{{find.username}}</td>
+            <td>{{find.content}}</td>
         </tr>
-    {{/id}}
+
     </tbody>
 </table>
 
+ <!--매우중요 id.id 앞의 id는 해당 컨트롤러 모델이름!!!!!!!!!!!!!!!!!11-->
 <a href="/content"><button type="button" class="btn btn-primary">목록으로</button></a>
-
+<a href="/content/{{find.id}}/edit"><button type="button" class="btn btn-primary">수정하기</button></a>
 {{>resources/footer}}

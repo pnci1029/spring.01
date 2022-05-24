@@ -38,25 +38,30 @@ public class contentController {
         contententity saved = contentRepository.save(entity);
         log.info(saved.toString());
 
+        return "redirect:/content/"+saved.getID();
+    }
+
+    @GetMapping("/content")
+    public String maincontent(Model model){
+        List<contententity> listcontent = contentRepository.findAll();
+
+        model.addAttribute("main", listcontent);
+
         return "article/main";
     }
 
-   @GetMapping("/content/{id}")
-    public String idcontent(@PathVariable  Long id, Model model){
-       contententity findid = contentRepository.findById(id).orElse(null);
+    @GetMapping("/content/{id}")
+    public String numbercontent(@PathVariable Long id, Model model){
+        contententity findid= contentRepository.findById(id).orElse(null);
+        model.addAttribute("find", findid);
+     return "article/id";
+    }
 
-       model.addAttribute("id", findid);
-
-        return "article/id";
-   }
-
-   @GetMapping("/content")
-    public String maincontent(Model model){
-        List<contententity> savedList = contentRepository.findAll();
-
-        model.addAttribute("List", savedList);
-
-        return "article/main";
-   }
+    @GetMapping("/content/{id}/edit")
+    public String editcotent(@PathVariable Long id, Model model){
+        contententity edit= contentRepository.findById(id).orElse(null);
+        model.addAttribute("edit", edit);
+        return "article/edit";
+    }
 
 }

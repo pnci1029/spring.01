@@ -1,13 +1,13 @@
 {{>resources/header}}
 
-<form class="container" action="/content/create" method="post" >
+<form class="container" action="" method="post" >
     <div class="mb-3">
         <label class="form-label" >User ID</label>
-        <input type="text" class="form-control" name="username" >
+        <input type="text" class="form-control" name="username" value="{{edit.username}}">
     </div>
     <div class="mb-3">
         <label class="form-label">content</label>
-        <textarea class="form-control" rows="3" name="content"></textarea>
+        <textarea class="form-control" rows="3" name="content">{{edit.username}}</textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

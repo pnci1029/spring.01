@@ -26,6 +26,7 @@ public class contententity {
     @Column
     private String content;
 
-
-
+    public Long getID() {
+        return id;
+    }
 }
