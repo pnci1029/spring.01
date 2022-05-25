@@ -3,11 +3,11 @@ package HCHH.Spring.controller;
 import HCHH.Spring.DTO.contentdto;
 import HCHH.Spring.Entity.contententity;
 import HCHH.Spring.Repository.ContentRepository;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,6 +62,32 @@ public class contentController {
         contententity edit= contentRepository.findById(id).orElse(null);
         model.addAttribute("edit", edit);
         return "article/edit";
+    }
+
+    @PostMapping("/content/{id}/update")
+    public String updatecontent(@PathVariable Long id, contentdto dto, Model model){
+        log.info(dto.toString());
+        contententity entity = dto.toEntity();
+
+        contententity target = contentRepository.findById(entity.getID()).orElse(null);
+
+        if(target != null){
+            contentRepository.save(entity);
+        }
+
+        model.addAttribute(entity);
+        return "redirect:/content/"+entity.getID();
+    }
+
+    @GetMapping("/content/{id}/delete")
+    public String deletecontent(@PathVariable Long id){
+        contententity targetid = contentRepository.findById(id).orElse(null);
+
+        if(targetid != null){
+            contentRepository.delete(targetid);
+        }
+
+        return "redirect:/content/";
     }
 
 }

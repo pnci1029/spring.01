@@ -1,13 +1,14 @@
 {{>resources/header}}
 
-<form class="container" action="" method="post" >
+<form class="container" action="/content/{{id}}/update" method="post" >
     <div class="mb-3">
+       <input name="id" type="hidden" value="{{edit.id}}" />
         <label class="form-label" >User ID</label>
         <input type="text" class="form-control" name="username" value="{{edit.username}}">
     </div>
     <div class="mb-3">
         <label class="form-label">content</label>
-        <textarea class="form-control" rows="3" name="content">{{edit.username}}</textarea>
+        <textarea class="form-control" rows="3" name="content">{{edit.content}}</textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

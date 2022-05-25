@@ -9,12 +9,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 public class contentdto {
+    private Long id;
     private String username;
     private String content;
 
 
     public contententity toEntity() {
 
-        return new contententity(null, username, content);
+        return new contententity(id, username, content);
     }
 }
