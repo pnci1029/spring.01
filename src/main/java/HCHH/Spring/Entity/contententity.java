@@ -1,9 +1,6 @@
 package HCHH.Spring.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,7 +10,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-
+@Getter
+@Setter
 public class contententity {
 
     @Id
