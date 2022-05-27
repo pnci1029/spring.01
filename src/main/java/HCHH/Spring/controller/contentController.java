@@ -54,7 +54,7 @@ public class contentController {
     public String numbercontent(@PathVariable Long id, Model model){
         contententity findid= contentRepository.findById(id).orElse(null);
         model.addAttribute("find", findid);
-     return "article/id";
+        return "article/id";
     }
 
     @GetMapping("/content/{id}/edit")

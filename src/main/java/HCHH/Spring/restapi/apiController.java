@@ -4,6 +4,7 @@ package HCHH.Spring.restapi;
 import HCHH.Spring.DTO.contentdto;
 import HCHH.Spring.Entity.contententity;
 import HCHH.Spring.Repository.ContentRepository;
+import HCHH.Spring.Service.ContentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,44 +16,40 @@ import java.util.List;
 @RestController
 public class apiController {
     @Autowired
-    private ContentRepository contentRepository;
+    private ContentService contentService;
 
     @GetMapping("/api/get")
     public List<contententity> getapi(){
-        return contentRepository.findAll();
+        return contentService.getall();
     }
     @GetMapping("/api/get/{id}")
     public contententity getid(@PathVariable Long id){
-        return contentRepository.findById(id).orElse(null);
+        return contentService.getid(id);
     }
 
     @PostMapping("/api/post")
-    public contententity postapi(@RequestBody contentdto dto){
-        contententity entity = dto.toEntity();
-        contententity target= contentRepository.save(entity);
-        return target;
+    public ResponseEntity<contententity> postapi(@RequestBody contentdto dto){
+        contententity target = contentService.post(dto);
+        return (target != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(target):
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @PatchMapping("/api/patch/{id}")
     public ResponseEntity<contententity> patchapi(@RequestBody contentdto dto, @PathVariable Long id){
-        contententity findid = contentRepository.findById(id).orElse(null);
-        contententity target = dto.toEntity();
-        contententity update = contentRepository.save(target);
-        if(findid == null || id != dto.getId()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-        log.info("아이디가 없읍니다.");
-        return ResponseEntity.status(HttpStatus.OK).body(update);
+        contententity result = contentService.patch(dto, id);
+        return (result!=null)?
+                ResponseEntity.status(HttpStatus.OK).body(result):
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @DeleteMapping("/api/delete/{id}")
     public ResponseEntity<contententity> deleteapi(@PathVariable Long id){
-        contententity target = contentRepository.findById(id).orElse(null);
-        if(target == null){
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-         contentRepository.delete(target);
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+        contententity target = contentService.delete(id);
+
+        return (target != null)?
+                ResponseEntity.status(HttpStatus.OK).body(null):
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
 }
